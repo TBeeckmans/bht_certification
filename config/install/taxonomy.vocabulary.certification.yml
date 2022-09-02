@@ -1,0 +1,8 @@
+vid: certification
+name: Certification
+description: 'Certification vocabulary'
+hierarchy: 1
+weight: 0
+status: true
+langcode: en
+dependencies: {  }

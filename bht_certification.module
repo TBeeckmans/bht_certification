@@ -1,0 +1,47 @@
+<?php
+
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Field\BaseFieldDefinition;
+
+/**
+ * Implements hook_entity_bundle_field_info().
+ */
+function bht_certification_entity_bundle_field_info(EntityTypeInterface $entity_type, $bundle, array $base_field_definitions) {
+  if ($entity_type->id() === 'user') {
+    $fields = [];
+
+    $fields['certification'] = BaseFieldDefinition::create('entity_reference')
+      ->setName('certification')
+      ->setLabel(t('Certification'))
+      ->setDescription(t('The therapists certification grade.'))
+      ->setSettings([
+        'handler' => 'default',
+        'target_type' => 'taxonomy_term',
+        'target_bundles' => ['certification' => 'certification'],
+        'sort' => ['field' => 'name', 'direction' => 'ASC'],
+        'auto_create' => FALSE,
+      ])
+      ->setDisplayOptions('view', [
+        'label' => 'hidden',
+        'type' => 'entity_reference',
+        'weight' => 11,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'entity_reference_autocomplete',
+        'weight' => 11,
+        'settings' => [
+          'match_operator' => 'CONTAINS',
+          'size' => '60',
+          'autocomplete_type' => 'tags',
+          'placeholder' => '',
+        ],
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE)
+      ->setCardinality(1)
+      ->setTranslatable(FALSE)
+      ->setRequired(FALSE);
+
+    return $fields;
+  }
+}

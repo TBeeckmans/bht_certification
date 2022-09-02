@@ -1,0 +1,12 @@
+{
+    "name": "bht/bht_certification",
+    "type": "drupal-custom-module",
+    "keywords": ["Drupal", "bht_certification"],
+    "authors": [
+      {
+        "name": "Thierry Beeckmans",
+        "email": "webmaster@bht.be"
+      }
+    ],
+    "require": { }
+}
